@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<h2>{% block titulo %}{% endblock  %}</h2>	
+<div class="container">
+	<form>
+		<div class="mb-3">
+		  <label for="" class="form-label">Titulo</label>
+		  <input type="text"
+			class="form-control" name="" id="" aria-describedby="helpId" placeholder="" value="{% block tituloLibro %}{% endblock  %}">
+		</div>
+		<div class="mb-3">
+		  <label for="" class="form-label">Imagen</label>
+		  <input type="text"
+			class="form-control" name="" id="" aria-describedby="helpId" placeholder="" value="{% block imagenLibro %}{% endblock %}">
+		</div>
+		<div class="mb-3">
+		  <label for="" class="form-label">Descripción</label>
+		  <input type="text"
+		  class="form-control" name="" id="" aria-describedby="helpId" placeholder="" value="{% block descLibro %}{% endblock %}">
+		</div>
+		<button type="submit" class="btn btn-primary">{% block accion %}{% endblock  %}</button>
+	</form>
+</div>
+{% endblock  %}
