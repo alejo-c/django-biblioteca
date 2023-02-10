@@ -20,7 +20,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$!)f347-d32bmy)km9*!&v5w81a=x4x=6dpt_x_ycs7)a$y1pt'
+SECRET_KEY = (
+    'django-insecure-$!)f347-d32bmy)km9*!&v5w81a=x4x=6dpt_x_ycs7)a$y1pt'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'libreria'
+    'libreria',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +79,11 @@ WSGI_APPLICATION = 'biblioteca.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'libreria.db',
+        'USER': 'admin-libreria',
+        'PASSWORD': 'superuser',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
