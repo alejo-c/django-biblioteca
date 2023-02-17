@@ -1,25 +1,23 @@
 {% extends 'base.html' %}
 
+<h2>{% block titulo %}{% endblock %}</h2>
 {% block contenido %}
-<h2>{% block titulo %}{% endblock  %}</h2>	
 <div class="container">
-	<form>
+
+	<form enctype="multipart/form-data" method="post">
+		{% csrf_token %}
+		{% for campo in form %}
 		<div class="mb-3">
-		  <label for="" class="form-label">Titulo</label>
-		  <input type="text"
-			class="form-control" name="" id="" aria-describedby="helpId" placeholder="" value="{% block tituloLibro %}{% endblock  %}">
+			<label for="" class="form-label">{{ campo.label }}</label>
+			<input type="{{ campo.field.widget.input_type }}" class="form-control"
+				name="{{ campo.name }}" id="" aria-describedby="helpId"
+				placeholder="{{ campo.label }}" value="">
 		</div>
-		<div class="mb-3">
-		  <label for="" class="form-label">Imagen</label>
-		  <input type="text"
-			class="form-control" name="" id="" aria-describedby="helpId" placeholder="" value="{% block imagenLibro %}{% endblock %}">
-		</div>
-		<div class="mb-3">
-		  <label for="" class="form-label">Descripción</label>
-		  <input type="text"
-		  class="form-control" name="" id="" aria-describedby="helpId" placeholder="" value="{% block descLibro %}{% endblock %}">
-		</div>
-		<button type="submit" class="btn btn-primary">{% block accion %}{% endblock  %}</button>
+		<div class="col-12 help-text">{{ campo.errors }}</div>
+		{% endfor %}
+
+		<input type="submit" class="btn btn-success" value="Enviar Información">
 	</form>
 </div>
-{% endblock  %}
+{% endblock %}
+<!--  -->
