@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Inicio de sesión {% endblock %}
+
+{% block contenido %}
+
+<h2>You have been logged out</h2>
+<p><a href="{% url 'login' %}">Click here to log back in</a></p>
+
+{% endblock %}

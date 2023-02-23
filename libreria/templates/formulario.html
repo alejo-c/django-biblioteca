@@ -1,23 +1,47 @@
 {% extends 'base.html' %}
 
-<h2>{% block titulo %}{% endblock %}</h2>
 {% block contenido %}
-<div class="container">
+<div class="card">
+	<div class="card-header">
+		<h5>{% block titulo %}{% endblock %}</h5>
+	</div>
+	<div class="card-body">
+		<form enctype="multipart/form-data" method="post">
+			{% csrf_token %}
+			{% for campo in form %}
+			<div class="mb-3">
+				<label for="" class="form-label">{{ campo.label }}</label>
+				{% if campo.field.widget.input_type == 'file' %}
+				<input type="{{ campo.field.widget.input_type }}" class="form-control" name="{{ campo.name }}"
+					id="image-selector" aria-describedby="helpId" placeholder="{{ campo.label }}"
+					value="{{ campo.value }}" onchange="previewImage()">
+				<img src="{{ campo.value.url }}" alt="{{ campo.label }}" width="100px" id="image-preview">
+				{% else %}
+				<input type="{{ campo.field.widget.input_type }}" class="form-control" name="{{ campo.name }}"
+					id="image-selector" aria-describedby="helpId" placeholder="{{ campo.label }}"
+					value="{{ campo.value }}">
+				{% endif %}
+				<div class="col-12 help-text">{{ campo.errors }}</div>
+				{% endfor %}
+			</div>
 
-	<form enctype="multipart/form-data" method="post">
-		{% csrf_token %}
-		{% for campo in form %}
-		<div class="mb-3">
-			<label for="" class="form-label">{{ campo.label }}</label>
-			<input type="{{ campo.field.widget.input_type }}" class="form-control"
-				name="{{ campo.name }}" id="" aria-describedby="helpId"
-				placeholder="{{ campo.label }}" value="">
-		</div>
-		<div class="col-12 help-text">{{ campo.errors }}</div>
-		{% endfor %}
-
-		<input type="submit" class="btn btn-success" value="Enviar Información">
-	</form>
+			<input type="submit" class="btn btn-success" value="Enviar Información">
+		</form>
+	</div>
 </div>
+
+<script>
+	previewImage = e => {
+		const preview = document.querySelector('#image-preview')
+		const image = event.target.files[0]
+		const reader = new FileReader()
+
+		reader.addEventListener('load', () => {
+			preview.src = reader.result
+		}, false)
+
+		if (image)
+			reader.readAsDataURL(image)
+	}
+</script>
 {% endblock %}
-<!--  -->

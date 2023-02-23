@@ -4,9 +4,7 @@
 
 {% block contenido %}
 <div class="card">
-	<div class="card-header">
-		Listar Libros
-	</div>
+	<div class="card-header">Lista de Libros</div>
 	<div class="card-body">
 		<a class="btn btn-primary" href="{% url 'crear' %}">Crear</a>
 
@@ -33,17 +31,14 @@
 						<td><img src="{{ libro.imagen.url }}" alt="{{ libro.titulo }}" width="100px"></td>
 						<td>{{ libro.descripcion }}</td>
 						<td>
-							<a class="btn btn-success" href="{% url 'editar' %}">Editar</a>
-							<a class="btn btn-danger" href="{% url 'eliminar' libro.id %}">Borrar</a>
+							<a class="btn btn-success" href="{% url 'editar' libro.id %}">Editar</a>
+							<a class="btn btn-danger" href="{% url 'borrar' libro.id %}">Borrar</a>
 						</td>
 					</tr>
 					{% endfor %}
 				</tbody>
 			</table>
 		</div>
-	</div>
-	<div class="card-footer text-muted">
-		Crear Libro
 	</div>
 </div>
 {% endblock %}
